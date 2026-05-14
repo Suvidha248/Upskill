@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SkillPath Lite - Goal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>SkillPath Lite</h1>
+    <h2>Define your learning goal</h2>
+
+    <form id="goal-form">
+      <label>Goal:
+        <input type="text" id="goalText" placeholder="Become Java Backend Developer">
+      </label>
+      <label>Timeline:
+        <input type="text" id="timeline" placeholder="3 months">
+      </label>
+      <button type="submit">Create Goal & Generate Plan</button>
+    </form>
+
+    <div id="goal-result"></div>
+  </div>
+
+  <script src="dist/goal.js"></script>
+</body>
+</html>
