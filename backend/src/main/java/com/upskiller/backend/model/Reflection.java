@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="reflections")
+@Table(name = "reflections")
 public class Reflection {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "goal_id")
     private Goal goal;
 
     @Lob
@@ -21,5 +23,37 @@ public class Reflection {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // getters and setters
+    // Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public Goal getGoal() {
+        return goal;
+    }
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
+    public String getReflectionText() {
+        return reflectionText;
+    }
+
+    public void setReflectionText(String reflectionText) {
+        this.reflectionText = reflectionText;
+    }
+
+    public String getAiFeedback() {
+        return aiFeedback;
+    }
+
+    public void setAiFeedback(String aiFeedback) {
+        this.aiFeedback = aiFeedback;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }
