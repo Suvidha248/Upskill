@@ -22,25 +22,34 @@ public class AIService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String callLLM(String prompt) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(apiKey);
 
-        Map<String, Object> body = Map.of(
-                "model", "gpt-4o-mini",
-                "messages", new Object[]{
-                        Map.of("role", "user", "content", prompt)
-                }
-        );
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(apiKey);
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-        ResponseEntity<Map> response = restTemplate.postForEntity(apiUrl, entity, Map.class);
+            Map<String, Object> body = Map.of(
+                    "model","llama-3.1-70b-versatile",
+                    "messages", new Object[]{
+                            Map.of("role", "system", "content", "You are Upskiller AI. Provide clear, structured, helpful responses."),
+                            Map.of("role", "user", "content", prompt)
+                    }
+            );
 
-        Map<String, Object> choice =
-                (Map<String, Object>) ((java.util.List<?>) response.getBody().get("choices")).get(0);
+            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        Map<String, Object> message = (Map<String, Object>) choice.get("message");
+            ResponseEntity<Map> response =
+                    restTemplate.postForEntity(apiUrl, entity, Map.class);
 
-        return (String) message.get("content");
+            Map<String, Object> choice =
+                    (Map<String, Object>) ((java.util.List<?>) response.getBody().get("choices")).get(0);
+
+            Map<String, Object> message = (Map<String, Object>) choice.get("message");
+
+            return (String) message.get("content");
+
+        } catch (Exception e) {
+            return "AI Error: " + e.getMessage();
+        }
     }
 }
