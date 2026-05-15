@@ -9,6 +9,9 @@ form.addEventListener("submit", async (e) => {
   const goalText = (document.getElementById("goalText") as HTMLInputElement).value;
   const timeline = (document.getElementById("timeline") as HTMLInputElement).value;
 
+  console.log("Frontend TS is running!");
+
+
   // For MVP: hardcode userId = 1
   const createGoalRes = await fetch(`${backendBase}/api/goal`, {
     method: "POST",
