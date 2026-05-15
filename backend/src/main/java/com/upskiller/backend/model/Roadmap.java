@@ -1,5 +1,7 @@
 package com.upskiller.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Roadmap {
 
     @ManyToOne
     @JoinColumn(name = "goal_id")
+    @JsonIgnore
     private Goal goal;
 
     private Integer weekNumber;

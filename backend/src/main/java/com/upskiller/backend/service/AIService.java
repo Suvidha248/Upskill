@@ -29,7 +29,7 @@ public class AIService {
             headers.setBearerAuth(apiKey);
 
             Map<String, Object> body = Map.of(
-                    "model","llama-3.1-70b-versatile",
+                    "model","llama-3.3-70b-versatile",
                     "messages", new Object[]{
                             Map.of("role", "system", "content", "You are Upskiller AI. Provide clear, structured, helpful responses."),
                             Map.of("role", "user", "content", prompt)
